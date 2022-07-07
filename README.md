@@ -9,6 +9,6 @@ Create notes right from your terminal
 
 # Run in Replit ⠕
 
-You can also run super_ai_print in Replit ⠕, a free online coding environment.
+You can also run todo in Replit ⠕, a free online coding environment.
 
 [Try it now!](https://replit.com/@dsalvador/todo) (start here!)
