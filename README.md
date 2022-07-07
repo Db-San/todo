@@ -1,8 +1,8 @@
 # todo
-Create notes right from your terminal.
+Create notes right from your terminal
 
 # Features
-- Make notes, lists, and todo lists.
+- Make notes, and todo lists
 
 # Requirements
 - Python 3.x
