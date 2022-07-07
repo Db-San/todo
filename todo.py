@@ -2,11 +2,11 @@ import os
 import pickle
 
 # Python 3.8.12
-# A CLI todo app
+# A CLI note taking app
 
 # Functions
 def display_title_bar():
-  # Clears the terminal screen, displays a title bar that
+  # Clears the terminal screen, and displays a title bar that
   #  includes the amount of notes saved
   os.system('clear')
   print("----------------------------------")
@@ -14,6 +14,7 @@ def display_title_bar():
   print("----------------------------------")
 
 def get_choice(invalid_input):
+    # Print menu
     print("\nMenu:")
     print("1 - New Note")
     print("2 - Edit title")
@@ -21,12 +22,10 @@ def get_choice(invalid_input):
     print("4 - Delete note")
     print("Q - Quit app")
 
-    # Check for invalid user input
+    # Check if the user input is valid
     if invalid_input:
-        choice = input("Invalid option. Please try again [1-4, Q]:\n> ")
-        invalid_input = False
-    else:
-        choice = input("Choose an option [1-4, Q]:\n> ")
+        print("Invalid option. Please try again.")
+    choice = input("Choose an option [1-4, Q]:\n> ")
     return choice
 
 def get_note_title():
@@ -53,7 +52,7 @@ def save_note():
         print(e)
 
 def load_note_titles():
-    # Load note titles. If the file is not found, it returns an
+    # Load note titles from a file. If the file can't be found, it returns an
     #  empty array
     try:
         file_note_titles = open('titles.pydata', 'rb')
@@ -65,7 +64,7 @@ def load_note_titles():
         return []
 
 def load_note_contents():
-    # Load note contents. If the file is not found, it an
+    # Load note contents from a file. If the file is not found, it returns an
     #  empty array
     try:
         file_note_contents = open('contents.pydata', 'rb')
@@ -77,13 +76,11 @@ def load_note_contents():
         return []
 
 def new_note():
-    # Creates a new notes, and saves it to a file
+    # Create a new note
     display_title_bar()
     note_titles.append(get_note_title())
     note_contents.append(get_note_content())
-    save_note()
 
-# 2
 def edit_note_title():
     display_title_bar()
     display_note_titles()
@@ -91,7 +88,7 @@ def edit_note_title():
     note_index = int(note_index)
     new_note_title = input("Edit the title:\n> ")
     note_titles[note_index-1] = new_note_title
-# 3
+
 def edit_note_content():
     display_title_bar()
     display_note_titles()
@@ -100,7 +97,6 @@ def edit_note_content():
     new_note_content = input("Edit the note:\n> ")
     note_contents[note_index-1] = new_note_content
 
-# 4
 def delete_note():
     display_title_bar()
     note_index = input("Enter note ID to delete:\n> ")
@@ -109,6 +105,10 @@ def delete_note():
     return note_index
 
 def display_notes(display_content):
+    # This function display notes. If the display content is Ttrue,
+    #  it prints both the note title and it's cotents. If it is false,
+    #  it only prints the titles. Usually it's set to false when the
+    #  to aid note selection for editing 
     for index, note_title in enumerate(note_titles):
         note_id = index + 1
         print("[#%d / %s]\n" % (note_id, note_title), end="")
@@ -123,12 +123,12 @@ def display_note_titles():
 
 # Main app
 # Initialize variables
-
 choice = " "
-invalid_input = False
 display_content = True
+invalid_input = False
 note_titles = load_note_titles()
 note_contents = load_note_contents()
+
 while choice != "Q":
     display_title_bar()
 
@@ -138,6 +138,11 @@ while choice != "Q":
     # Get user choice
     choice = get_choice(invalid_input)
 
+    # Display a message if the input is invalid
+    if invalid_input:
+        print("Invalid option. Please try again.")
+        invalid_input = False
+
     # Respond to user choice
     if choice == "1":
         new_note()
@@ -146,7 +151,6 @@ while choice != "Q":
     elif choice == "3":
         edit_note_content()
     elif choice == "4":
-        
         # Delete a note
         note_id = delete_note()
         note_titles.pop(note_id)
