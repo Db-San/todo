@@ -1,5 +1,5 @@
 # todo
-Create notes and todo lists right from your terminal
+Create notes and todos direct from your terminal
 
 # Features
 - Make notes, and todo lists
